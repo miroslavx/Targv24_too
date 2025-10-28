@@ -5,136 +5,100 @@
              Title="TRIPS-TRAPS-TRULL"
              x:Name="page">
     
-    <VerticalStackLayout Padding="20" Spacing="15">
-        
-        <!-- Выбор темы -->
-        <Frame x:Name="themeFrame" Padding="10" CornerRadius="0" HorizontalOptions="Center">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="TEEMA:" 
-                       x:Name="themeLabelTitle"
-                       FontFamily="ST-Kooperativ" 
-                       FontSize="14"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"/>
-                <Picker x:Name="themePicker"
-                        FontFamily="ST-Kooperativ"
-                        FontSize="14"
-                        SelectedIndexChanged="OnThemeChanged"
-                        WidthRequest="200">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Macintosh 1984</x:String>
-                            <x:String>Windows 3.1</x:String>
-                            <x:String>Windows 95</x:String>
-                            <x:String>Commodore 64</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-            </HorizontalStackLayout>
-        </Frame>
-        
-        <!-- Чей ход -->
-        <Label x:Name="turnLabel"
-               Text="KÄIK: X"
-               FontFamily="ST-Kooperativ"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalOptions="Center" />
-        
-        <!-- Игровое поле 3x3 -->
-        <Frame x:Name="gameFrame" Padding="0" CornerRadius="0" HorizontalOptions="Center">
-            <Grid x:Name="gameGrid"
-                  RowDefinitions="100,100,100"
-                  ColumnDefinitions="100,100,100"
-                  RowSpacing="3"
-                  ColumnSpacing="3">
-                
-                <Button x:Name="btn00" Grid.Row="0" Grid.Column="0" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn01" Grid.Row="0" Grid.Column="1" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn02" Grid.Row="0" Grid.Column="2" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn10" Grid.Row="1" Grid.Column="0" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn11" Grid.Row="1" Grid.Column="1" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn12" Grid.Row="1" Grid.Column="2" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn20" Grid.Row="2" Grid.Column="0" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn21" Grid.Row="2" Grid.Column="1" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-                
-                <Button x:Name="btn22" Grid.Row="2" Grid.Column="2" 
-                        Clicked="OnCellClicked" 
-                        FontFamily="ST-Kooperativ"
-                        FontSize="40"
-                        FontAttributes="Bold"
-                        CornerRadius="0"/>
-            </Grid>
-        </Frame>
-        
-        <!-- Кнопки -->
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-            <Button Grid.Column="0"
-                    x:Name="newGameButton"
-                    Text="UUS MÄNG"
-                    Clicked="OnNewGameClicked"
-                    FontFamily="ST-Kooperativ"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    CornerRadius="0"/>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
             
-            <Button Grid.Column="1"
-                    x:Name="backButton"
-                    Text="TAGASI"
-                    Clicked="OnBackClicked"
-                    FontFamily="ST-Kooperativ"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    CornerRadius="0"/>
-        </Grid>
-        
-    </VerticalStackLayout>
+            <!-- Выбор темы -->
+            <Frame x:Name="themeFrame" Padding="10" CornerRadius="0" HorizontalOptions="Center">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="TEEMA:" 
+                           x:Name="themeLabelTitle"
+                           FontFamily="ST-Kooperativ" 
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                    <Picker x:Name="themePicker"
+                            FontFamily="ST-Kooperativ"
+                            FontSize="14"
+                            SelectedIndexChanged="OnThemeChanged"
+                            WidthRequest="200">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Macintosh 1984</x:String>
+                                <x:String>Windows 3.1</x:String>
+                                <x:String>Windows 95</x:String>
+                                <x:String>Commodore 64</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </HorizontalStackLayout>
+            </Frame>
+            
+            <!-- Статистика -->
+            <Frame x:Name="statsFrame" Padding="15" CornerRadius="0">
+                <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10">
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label x:Name="xWinsTitle" Text="X" FontFamily="ST-Kooperativ" FontSize="12" HorizontalTextAlignment="Center"/>
+                        <Label x:Name="xWinsLabel" Text="0" FontFamily="ST-Kooperativ" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label x:Name="oWinsTitle" Text="O" FontFamily="ST-Kooperativ" FontSize="12" HorizontalTextAlignment="Center"/>
+                        <Label x:Name="oWinsLabel" Text="0" FontFamily="ST-Kooperativ" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="2">
+                        <Label x:Name="drawsTitle" Text="VIIK" FontFamily="ST-Kooperativ" FontSize="12" HorizontalTextAlignment="Center"/>
+                        <Label x:Name="drawsLabel" Text="0" FontFamily="ST-Kooperativ" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="3">
+                        <Label x:Name="totalTitle" Text="KOKKU" FontFamily="ST-Kooperativ" FontSize="12" HorizontalTextAlignment="Center"/>
+                        <Label x:Name="totalLabel" Text="0" FontFamily="ST-Kooperativ" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+            
+            <!-- Чей ход -->
+            <Label x:Name="turnLabel"
+                   Text="KÄIK: X"
+                   FontFamily="ST-Kooperativ"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+            
+            <!-- Игровое поле -->
+            <Frame x:Name="gameFrame" Padding="0" CornerRadius="0" HorizontalOptions="Center">
+                <Grid x:Name="gameGrid"
+                      RowDefinitions="100,100,100"
+                      ColumnDefinitions="100,100,100"
+                      RowSpacing="3"
+                      ColumnSpacing="3">
+                    
+                    <Button x:Name="btn00" Grid.Row="0" Grid.Column="0" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn01" Grid.Row="0" Grid.Column="1" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn02" Grid.Row="0" Grid.Column="2" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn10" Grid.Row="1" Grid.Column="0" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn11" Grid.Row="1" Grid.Column="1" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn12" Grid.Row="1" Grid.Column="2" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn20" Grid.Row="2" Grid.Column="0" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn21" Grid.Row="2" Grid.Column="1" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                    <Button x:Name="btn22" Grid.Row="2" Grid.Column="2" Clicked="OnCellClicked" FontFamily="ST-Kooperativ" FontSize="40" FontAttributes="Bold" CornerRadius="0"/>
+                </Grid>
+            </Frame>
+            
+            <!-- Кнопки -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Grid.Column="0" x:Name="newGameButton" Text="UUS MÄNG" Clicked="OnNewGameClicked" FontFamily="ST-Kooperativ" FontSize="14" FontAttributes="Bold" CornerRadius="0"/>
+                <Button Grid.Column="1" x:Name="rulesButton" Text="REEGLID" Clicked="OnRulesClicked" FontFamily="ST-Kooperativ" FontSize="14" FontAttributes="Bold" CornerRadius="0"/>
+            </Grid>
+            
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Grid.Column="0" x:Name="clearStatsButton" Text="KUSTUTA STAT" Clicked="OnClearStatsClicked" FontFamily="ST-Kooperativ" FontSize="14" FontAttributes="Bold" CornerRadius="0"/>
+                <Button Grid.Column="1" x:Name="backButton" Text="TAGASI" Clicked="OnBackClicked" FontFamily="ST-Kooperativ" FontSize="14" FontAttributes="Bold" CornerRadius="0"/>
+            </Grid>
+            
+        </VerticalStackLayout>
+    </ScrollView>
     
 </ContentPage>

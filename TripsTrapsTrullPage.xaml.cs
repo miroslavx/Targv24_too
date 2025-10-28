@@ -2,18 +2,29 @@
 
 public partial class TripsTrapsTrullPage : ContentPage
 {
-    private string current = "X";  // Чей ход
+    private TripsTrapsTrullGame game;  // Логика игры в отдельном классе
     private List<TripsTrapsTrullTheme> themes;
     private int currentThemeIndex = 0;
+    private Button[,] buttons;
 
     public TripsTrapsTrullPage()
     {
         InitializeComponent();
+
+        game = new TripsTrapsTrullGame();
+
+        buttons = new Button[3, 3]
+        {
+            { btn00, btn01, btn02 },
+            { btn10, btn11, btn12 },
+            { btn20, btn21, btn22 }
+        };
+
         InitializeThemes();
         themePicker.SelectedIndex = 0;
+        UpdateStatistics();
     }
 
-    // Инициализация тем
     private void InitializeThemes()
     {
         themes = new List<TripsTrapsTrullTheme>
@@ -25,14 +36,12 @@ public partial class TripsTrapsTrullPage : ContentPage
         };
     }
 
-    // Смена темы
     private void OnThemeChanged(object sender, EventArgs e)
     {
         currentThemeIndex = themePicker.SelectedIndex;
         ApplyTheme();
     }
 
-    // Применить тему
     private void ApplyTheme()
     {
         var theme = themes[currentThemeIndex];
@@ -45,26 +54,25 @@ public partial class TripsTrapsTrullPage : ContentPage
         themePicker.TextColor = theme.TextColor;
         themePicker.BackgroundColor = theme.BackgroundColor;
 
+        statsFrame.BackgroundColor = theme.CellColor;
+        statsFrame.BorderColor = theme.BorderColor;
+        xWinsTitle.TextColor = oWinsTitle.TextColor = drawsTitle.TextColor = totalTitle.TextColor = theme.TextColor;
+        xWinsLabel.TextColor = oWinsLabel.TextColor = drawsLabel.TextColor = totalLabel.TextColor = theme.AccentColor;
+
         turnLabel.TextColor = theme.AccentColor;
 
         gameFrame.BackgroundColor = theme.BorderColor;
         gameFrame.BorderColor = theme.BorderColor;
         gameGrid.BackgroundColor = theme.BorderColor;
 
-        ApplyButtonTheme(btn00, theme);
-        ApplyButtonTheme(btn01, theme);
-        ApplyButtonTheme(btn02, theme);
-        ApplyButtonTheme(btn10, theme);
-        ApplyButtonTheme(btn11, theme);
-        ApplyButtonTheme(btn12, theme);
-        ApplyButtonTheme(btn20, theme);
-        ApplyButtonTheme(btn21, theme);
-        ApplyButtonTheme(btn22, theme);
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                ApplyButtonTheme(buttons[i, j], theme);
 
-        newGameButton.BackgroundColor = theme.ButtonColor;
-        newGameButton.TextColor = theme.ButtonTextColor;
-        backButton.BackgroundColor = theme.ButtonColor;
-        backButton.TextColor = theme.ButtonTextColor;
+        newGameButton.BackgroundColor = rulesButton.BackgroundColor = theme.ButtonColor;
+        newGameButton.TextColor = rulesButton.TextColor = theme.ButtonTextColor;
+        clearStatsButton.BackgroundColor = backButton.BackgroundColor = theme.ButtonColor;
+        clearStatsButton.TextColor = backButton.TextColor = theme.ButtonTextColor;
     }
 
     private void ApplyButtonTheme(Button btn, TripsTrapsTrullTheme theme)
@@ -73,96 +81,87 @@ public partial class TripsTrapsTrullPage : ContentPage
         btn.TextColor = theme.TextColor;
     }
 
-    // Клик по клетке
     private void OnCellClicked(object sender, EventArgs e)
     {
-        if (sender is Button btn && string.IsNullOrEmpty(btn.Text))
+        if (sender is Button btn)
         {
-            btn.Text = current;
+            int row = Grid.GetRow(btn);
+            int col = Grid.GetColumn(btn);
 
-            if (CheckWin(current))
+            if (game.MakeMove(row, col))
             {
-                DisplayAlert("VÕIT!", $"{current} võitis!", "OK");
-                ResetGame();
-                return;
-            }
+                btn.Text = game.CurrentPlayer;
 
-            if (IsDraw())
-            {
-                DisplayAlert("VIIK!", "Vabad lahtrid puuduvad.", "OK");
-                ResetGame();
-                return;
-            }
+                if (game.CheckWin())
+                {
+                    if (game.CurrentPlayer == "X")
+                        game.RegisterXWin();
+                    else
+                        game.RegisterOWin();
 
-            current = current == "X" ? "O" : "X";
-            turnLabel.Text = $"KÄIK: {current}";
+                    UpdateStatistics();
+                    DisplayAlert("VÕIT!", $"{game.CurrentPlayer} võitis!", "OK");
+                    ResetGame();
+                    return;
+                }
+
+                if (game.CheckDraw())
+                {
+                    game.RegisterDraw();
+                    UpdateStatistics();
+                    DisplayAlert("VIIK!", "Vabad lahtrid puuduvad.", "OK");
+                    ResetGame();
+                    return;
+                }
+
+                game.SwitchPlayer();
+                turnLabel.Text = $"KÄIK: {game.CurrentPlayer}";
+            }
         }
     }
 
-    // Новая игра
     private void OnNewGameClicked(object sender, EventArgs e)
     {
         ResetGame();
     }
 
-    // Назад
+    private async void OnRulesClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new TripsTrapsTrullRulesPage());
+    }
+
+    private async void OnClearStatsClicked(object sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlert("Kinnitus", "Kas kustutada kogu statistika?", "Jah", "Ei");
+        if (confirm)
+        {
+            game.ClearStatistics();
+            UpdateStatistics();
+        }
+    }
+
     private async void OnBackClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
     }
 
-    // Очистить поле
     private void ResetGame()
     {
-        btn00.Text = btn01.Text = btn02.Text = "";
-        btn10.Text = btn11.Text = btn12.Text = "";
-        btn20.Text = btn21.Text = btn22.Text = "";
+        game.ResetBoard();
 
-        current = "X";
-        turnLabel.Text = "KÄIK: X";
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                buttons[i, j].Text = "";
 
+        turnLabel.Text = $"KÄIK: {game.CurrentPlayer}";
         ApplyTheme();
     }
 
-    // Проверка победы
-    private bool CheckWin(string player)
+    private void UpdateStatistics()
     {
-        string?[,] board = new string?[3, 3]
-        {
-            { btn00.Text, btn01.Text, btn02.Text },
-            { btn10.Text, btn11.Text, btn12.Text },
-            { btn20.Text, btn21.Text, btn22.Text }
-        };
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (board[i, 0] == player && board[i, 1] == player && board[i, 2] == player)
-                return true;
-
-            if (board[0, i] == player && board[1, i] == player && board[2, i] == player)
-                return true;
-        }
-
-        if (board[0, 0] == player && board[1, 1] == player && board[2, 2] == player)
-            return true;
-
-        if (board[0, 2] == player && board[1, 1] == player && board[2, 0] == player)
-            return true;
-
-        return false;
-    }
-
-    // Проверка ничьи
-    private bool IsDraw()
-    {
-        return !string.IsNullOrEmpty(btn00.Text) &&
-               !string.IsNullOrEmpty(btn01.Text) &&
-               !string.IsNullOrEmpty(btn02.Text) &&
-               !string.IsNullOrEmpty(btn10.Text) &&
-               !string.IsNullOrEmpty(btn11.Text) &&
-               !string.IsNullOrEmpty(btn12.Text) &&
-               !string.IsNullOrEmpty(btn20.Text) &&
-               !string.IsNullOrEmpty(btn21.Text) &&
-               !string.IsNullOrEmpty(btn22.Text);
+        xWinsLabel.Text = game.XWins.ToString();
+        oWinsLabel.Text = game.OWins.ToString();
+        drawsLabel.Text = game.Draws.ToString();
+        totalLabel.Text = game.TotalGames.ToString();
     }
 }

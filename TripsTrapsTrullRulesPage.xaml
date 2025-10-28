@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="targv24_too.TripsTrapsTrullRulesPage"
+             Title="REEGLID">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" BackgroundColor="White">
+
+            <Label Text="TRIPS-TRAPS-TRULL"
+                   FontFamily="ST-Kooperativ"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,20"/>
+
+            <Frame Padding="15" BorderColor="Black" CornerRadius="0" BackgroundColor="White">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="MÄNGU EESMÄRK"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+
+                    <Label Text="Saada kolm oma sümbolit (X või O) ritta – horisontaalselt, vertikaalselt või diagonaalselt."
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="15" BorderColor="Black" CornerRadius="0" BackgroundColor="White">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="MÄNGU KULG"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+
+                    <Label Text="1. Mängijad käivad kordamööda"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="2. Esimene mängija kasutab X-i, teine O-d"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="3. Klõpsa tühjale lahtrile, et panna oma sümbol"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="4. Võidab see, kes saab esimesena kolm ritta"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="5. Kui kõik lahtrid on täis ega võitjat ole – viik"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="15" BorderColor="Black" CornerRadius="0" BackgroundColor="White">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="TEEMAD"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+
+                    <Label Text="Rakendus sisaldab 4 retro teemat:"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="• Macintosh 1984 – klassikaline must-valge"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="• Windows 3.1 – hall taust, sinised nupud"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="• Windows 95 – türkiis taust"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+
+                    <Label Text="• Commodore 64 – sinine retro"
+                           FontFamily="ST-Kooperativ"
+                           FontSize="14"
+                           TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="TAGASI"
+                    Clicked="OnBackClicked"
+                    FontFamily="ST-Kooperativ"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    CornerRadius="0"
+                    HorizontalOptions="Center"
+                    WidthRequest="200"
+                    Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
