@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="targv24_too.TripsTrapsTrullPage"
+             Title="TRIPS-TRAPS-TRULL"
+             x:Name="page">
+    
+    <VerticalStackLayout Padding="20" Spacing="15">
+        
+        <!-- Выбор темы -->
+        <Frame x:Name="themeFrame" Padding="10" CornerRadius="0" HorizontalOptions="Center">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="TEEMA:" 
+                       x:Name="themeLabelTitle"
+                       FontFamily="ST-Kooperativ" 
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+                <Picker x:Name="themePicker"
+                        FontFamily="ST-Kooperativ"
+                        FontSize="14"
+                        SelectedIndexChanged="OnThemeChanged"
+                        WidthRequest="200">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Macintosh 1984</x:String>
+                            <x:String>Windows 3.1</x:String>
+                            <x:String>Windows 95</x:String>
+                            <x:String>Commodore 64</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </HorizontalStackLayout>
+        </Frame>
+        
+        <!-- Чей ход -->
+        <Label x:Name="turnLabel"
+               Text="KÄIK: X"
+               FontFamily="ST-Kooperativ"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        
+        <!-- Игровое поле 3x3 -->
+        <Frame x:Name="gameFrame" Padding="0" CornerRadius="0" HorizontalOptions="Center">
+            <Grid x:Name="gameGrid"
+                  RowDefinitions="100,100,100"
+                  ColumnDefinitions="100,100,100"
+                  RowSpacing="3"
+                  ColumnSpacing="3">
+                
+                <Button x:Name="btn00" Grid.Row="0" Grid.Column="0" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn01" Grid.Row="0" Grid.Column="1" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn02" Grid.Row="0" Grid.Column="2" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn10" Grid.Row="1" Grid.Column="0" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn11" Grid.Row="1" Grid.Column="1" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn12" Grid.Row="1" Grid.Column="2" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn20" Grid.Row="2" Grid.Column="0" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn21" Grid.Row="2" Grid.Column="1" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+                
+                <Button x:Name="btn22" Grid.Row="2" Grid.Column="2" 
+                        Clicked="OnCellClicked" 
+                        FontFamily="ST-Kooperativ"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        CornerRadius="0"/>
+            </Grid>
+        </Frame>
+        
+        <!-- Кнопки -->
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button Grid.Column="0"
+                    x:Name="newGameButton"
+                    Text="UUS MÄNG"
+                    Clicked="OnNewGameClicked"
+                    FontFamily="ST-Kooperativ"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="0"/>
+            
+            <Button Grid.Column="1"
+                    x:Name="backButton"
+                    Text="TAGASI"
+                    Clicked="OnBackClicked"
+                    FontFamily="ST-Kooperativ"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="0"/>
+        </Grid>
+        
+    </VerticalStackLayout>
+    
+</ContentPage>

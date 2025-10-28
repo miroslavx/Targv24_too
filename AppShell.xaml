@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="targv24_too.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:targv24_too"
+    Title="targv24_too">
+
+    <Shell.TitleView>
+        <Label
+            Text="TALLINNA TÖÖSTUSHARIDUSKESKUS"
+            FontFamily="ST-Kooperativ"
+            FontSize="12"
+            FontAttributes="Bold"
+            TextColor="White"
+            BackgroundColor="Red"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"
+            VerticalOptions="Center"
+            Padding="10, 0, 10, 0"
+            HeightRequest="50"/>
+    </Shell.TitleView>
+
+    <ShellContent
+        Title="Avaleht"
+        ContentTemplate="{DataTemplate local:StartPage}"
+        Route="StartPage" />
+
+</Shell>

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="targv24_too.MemoPage"
+             Title="MEMO">
+
+	<!-- Фоновое изображение БЕЗ прозрачности -->
+	<Grid>
+		<Image Source="gorod.png"
+               Aspect="AspectFill"/>
+
+		<ScrollView>
+			<VerticalStackLayout Padding="20" Spacing="15">
+
+				<!-- Заголовок -->
+				<Frame Padding="15"
+                       CornerRadius="0"
+                       HasShadow="True"
+                       x:Name="titleFrame"
+                       Margin="0,10,0,0">
+					<Label
+                        Text="ALI BABA KOOBAS"
+                        FontFamily="ST-Kooperativ"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        x:Name="titleLabel"/>
+				</Frame>
+
+				<!-- Выбор уровня сложности -->
+				<Frame Padding="10"
+                       CornerRadius="0"
+                       HasShadow="True"
+                       x:Name="difficultyFrame">
+					<Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+						<Label Grid.Column="0"
+                               Text="TASE:"
+                               FontFamily="ST-Kooperativ"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               x:Name="difficultyTitleLabel"/>
+
+						<Picker Grid.Column="1"
+                                x:Name="difficultyPicker"
+                                FontFamily="ST-Kooperativ"
+                                FontSize="16"
+                                SelectedIndexChanged="DifficultyPicker_SelectedIndexChanged">
+							<Picker.ItemsSource>
+								<x:Array Type="{x:Type x:String}">
+									<x:String>KERGE (3x4)</x:String>
+									<x:String>KESKMINE (4x4)</x:String>
+									<x:String>RASKE (4x5)</x:String>
+								</x:Array>
+							</Picker.ItemsSource>
+						</Picker>
+					</Grid>
+				</Frame>
+
+				<!-- Информация об игроке -->
+				<Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+					<Frame Grid.Column="0"
+                           Padding="10"
+                           CornerRadius="0"
+                           HasShadow="True"
+                           x:Name="movesFrame">
+						<VerticalStackLayout>
+							<Label Text="KÄIGUD"
+                                   FontFamily="ST-Kooperativ"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   x:Name="movesTitle"/>
+							<Label x:Name="movesLabel"
+                                   Text="0"
+                                   FontFamily="ST-Kooperativ"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"/>
+						</VerticalStackLayout>
+					</Frame>
+
+					<Frame Grid.Column="1"
+                           Padding="10"
+                           CornerRadius="0"
+                           HasShadow="True"
+                           x:Name="pairsFrame">
+						<VerticalStackLayout>
+							<Label Text="PAARE"
+                                   FontFamily="ST-Kooperativ"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   x:Name="pairsTitle"/>
+							<Label x:Name="pairsLabel"
+                                   Text="0/8"
+                                   FontFamily="ST-Kooperativ"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"/>
+						</VerticalStackLayout>
+					</Frame>
+
+					<Frame Grid.Column="2"
+                           Padding="10"
+                           CornerRadius="0"
+                           HasShadow="True"
+                           x:Name="scoreFrame">
+						<VerticalStackLayout>
+							<Label Text="PUNKTID"
+                                   FontFamily="ST-Kooperativ"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   x:Name="scoreTitle"/>
+							<Label x:Name="scoreLabel"
+                                   Text="0"
+                                   FontFamily="ST-Kooperativ"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"/>
+						</VerticalStackLayout>
+					</Frame>
+				</Grid>
+
+				<!-- Игровое поле (динамическое) -->
+				<Frame Padding="10"
+                       CornerRadius="0"
+                       HasShadow="True"
+                       x:Name="gameFrame"
+                       HorizontalOptions="Center">
+					<Grid x:Name="gameGrid"
+                          RowSpacing="8"
+                          ColumnSpacing="8"
+                          HorizontalOptions="Center">
+					</Grid>
+				</Frame>
+
+				<!-- Кнопки управления -->
+				<Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,10,0,20">
+					<Frame Grid.Column="0"
+                           Padding="0"
+                           CornerRadius="0"
+                           HasShadow="True"
+                           x:Name="newGameButtonFrame">
+						<Button Text="UUS MÄNG"
+                                Clicked="NewGame_Clicked"
+                                FontFamily="ST-Kooperativ"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                CornerRadius="0"
+                                x:Name="newGameButton"/>
+					</Frame>
+
+					<Frame Grid.Column="1"
+                           Padding="0"
+                           CornerRadius="0"
+                           HasShadow="True"
+                           x:Name="themeButtonFrame">
+						<Button Text="TEEMA"
+                                Clicked="ChangeTheme_Clicked"
+                                FontFamily="ST-Kooperativ"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                CornerRadius="0"
+                                x:Name="themeButton"/>
+					</Frame>
+
+					<Frame Grid.Column="2"
+                           Padding="0"
+                           CornerRadius="0"
+                           HasShadow="True"
+                           x:Name="backButtonFrame">
+						<Button Text="TAGASI"
+                                Clicked="Back_Clicked"
+                                FontFamily="ST-Kooperativ"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                CornerRadius="0"
+                                x:Name="backButton"/>
+					</Frame>
+				</Grid>
+
+			</VerticalStackLayout>
+		</ScrollView>
+	</Grid>
+
+</ContentPage>

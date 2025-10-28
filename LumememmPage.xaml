@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="targv24_too.LumememmPage"  
+             Title="☃ Lumememm">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
+        <!-- Панель управления -->
+        <VerticalStackLayout Spacing="10" Grid.Row="0">
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <Label Text="Tegevus:" VerticalTextAlignment="Center"/>
+                <Picker x:Name="ActionPicker" WidthRequest="220">
+                    <Picker.Items>
+                        <x:String>Peida</x:String>
+                        <x:String>Näita</x:String>
+                        <x:String>Muuda värvi</x:String>
+                        <x:String>Sulata</x:String>
+                        <x:String>Tantsi</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Button Text="Tee" Clicked="OnDoActionClicked"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <Label Text="Läbipaistvus:" VerticalTextAlignment="Center"/>
+                <Slider x:Name="OpacitySlider" Minimum="0" Maximum="1" Value="1"
+                        WidthRequest="200" ValueChanged="OnOpacityChanged"/>
+                <Label x:Name="OpacityValueLabel" Text="1.00" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <Label Text="Kiirus (ms):" VerticalTextAlignment="Center"/>
+                <Stepper x:Name="SpeedStepper" Minimum="100" Maximum="2000" Increment="100" Value="600"
+                         ValueChanged="OnSpeedChanged"/>
+                <Label x:Name="SpeedLabel" Text="600 ms" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <Label x:Name="InfoLabel" Text="Vali tegevus ja vajuta 'Tee'." TextColor="#444" FontAttributes="Italic"/>
+        </VerticalStackLayout>
+
+        <!-- Снеговик -->
+        <AbsoluteLayout x:Name="Canvas" Grid.Row="1" BackgroundColor="#B8D8E8">
+
+            <!-- Нижний шар (самый большой) -->
+            <Frame x:Name="BottomBall" 
+                   WidthRequest="200" 
+                   HeightRequest="200"
+                   BackgroundColor="White" 
+                   BorderColor="#D0D0D0"
+                   CornerRadius="100" 
+                   HasShadow="True"
+                   AbsoluteLayout.LayoutBounds="0.5,0.72,200,200"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- Средний шар -->
+            <Frame x:Name="MiddleBall" 
+                   WidthRequest="150" 
+                   HeightRequest="150"
+                   BackgroundColor="White" 
+                   BorderColor="#D0D0D0"
+                   CornerRadius="75" 
+                   HasShadow="True"
+                   AbsoluteLayout.LayoutBounds="0.5,0.50,150,150"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- Верхний шар (голова) -->
+            <Frame x:Name="Head" 
+                   WidthRequest="100" 
+                   HeightRequest="100"
+                   BackgroundColor="White" 
+                   BorderColor="#D0D0D0"
+                   CornerRadius="50" 
+                   HasShadow="True"
+                   AbsoluteLayout.LayoutBounds="0.5,0.32,100,100"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- Ведро (угловатое) -->
+            <Frame x:Name="Bucket" 
+                   WidthRequest="90" 
+                   HeightRequest="50"
+                   BackgroundColor="#2E63B6" 
+                   CornerRadius="0"
+                   HasShadow="True"
+                   BorderColor="#1E4376"
+                   Rotation="-10"
+                   AbsoluteLayout.LayoutBounds="0.47,0.22,90,50"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>

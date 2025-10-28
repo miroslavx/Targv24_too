@@ -1,0 +1,27 @@
+﻿using Microsoft.Extensions.Logging;
+
+namespace targv24_too
+{
+    public static class MauiProgram
+    {
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("ST-Agitaciya.ttf", "ST-Agitaciya");
+                    fonts.AddFont("ST-Kooperativ.ttf", "ST-Kooperativ");
+                });
+
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
+
+            return builder.Build();
+        }
+    }
+}
