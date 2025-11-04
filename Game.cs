@@ -21,18 +21,16 @@
 
         // Рубашка карты (закрытое состояние)
         public string CardBackImage { get; } = "rubashka.png";
-
-        // Конструктор: создаём новую игру
         public Game(Player player, Theme theme, int pairs = 8)
         {
             Player = player;
             CurrentTheme = theme;
             totalPairs = pairs;
             Cards = new List<Card>();
-            InitializeCards();  // Создаём и перемешиваем карты
+            InitializeCards();  // перемешка карт
         }
 
-        // Создаём карты: выбираем картинки и создаём пары
+        // выбор карт
         private void InitializeCards()
         {
             Random random = new Random();
@@ -52,7 +50,7 @@
                 Cards.Add(new Card(selectedImages[i]));  // Вторая карта (пара)
             }
 
-            ShuffleCards();  // Перемешиваем в случайном порядке
+            ShuffleCards();  
         }
 
         //(алгоритм Фишера-Йейтса)

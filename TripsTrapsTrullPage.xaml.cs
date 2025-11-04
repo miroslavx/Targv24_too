@@ -2,7 +2,7 @@
 
 public partial class TripsTrapsTrullPage : ContentPage
 {
-    private TripsTrapsTrullGame game;  // Логика игры в отдельном классе
+    private TripsTrapsTrullGame game;  
     private List<TripsTrapsTrullTheme> themes;
     private int currentThemeIndex = 0;
     private Button[,] buttons;
